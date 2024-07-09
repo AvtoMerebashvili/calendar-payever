@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AppointmentComponent } from '../../shared/components/appointment/appointment.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { DragAndDropComponent } from '../../shared/components/drag-and-drop/drag-and-drop.component';
 import { GridComponent } from '../../shared/components/grid/grid.component';
 import { DatepickerComponent } from '../../shared/form/datepicker/datepicker.component';
-import { IAppointment } from './interfaces/appointment.interface';
+import { AppointmentComponent } from './components/appointment/appointment.component';
+import { PositionPipe } from './pipes/position.pipe';
 import { AppointmentService } from './services/appointment.service';
 import { FacadeService } from './services/facade.service';
 import { StoreService } from './services/store.service';
-import { PositionPipe } from './pipes/position.pipe';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-book-appointment',

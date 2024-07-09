@@ -10,17 +10,18 @@ import {
   output,
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { DraggableComponent } from '../../base/components/draggable.components';
+import { DraggableComponent } from '../../../../shared/base/components/draggable.components';
 import {
   IAppointment,
   IAppointmentDragging,
-} from '../../../features/book-appointment/interfaces/appointment.interface';
-import { DRAGGABLE_TOKEN } from '../../tokens/draggable-token';
+} from '../../interfaces/appointment.interface';
+import { DRAGGABLE_TOKEN } from '../../../../shared/tokens/draggable-token';
+import { AppointmentViewPipe } from '../../pipes/appointment-view.pipe';
 
 @Component({
   selector: 'app-appointment',
   standalone: true,
-  imports: [MatCardModule, CommonModule],
+  imports: [MatCardModule, CommonModule, AppointmentViewPipe],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.scss',
   providers: [

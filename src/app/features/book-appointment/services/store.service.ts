@@ -27,6 +27,14 @@ export class StoreService {
     this._store.set(key, filteredAppoitnments);
   }
 
+  public remove(id: number) {
+    const currentAppointments = this._store.get(this.getKey());
+    const filteredAppoitnments = currentAppointments?.filter(
+      (ap) => ap.id !== id
+    );
+    this._store.set(this.getKey(), filteredAppoitnments || []);
+  }
+
   public setDate(date: Date) {
     this.selectedDateSig.set(date);
   }

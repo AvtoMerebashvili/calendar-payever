@@ -1,16 +1,10 @@
 <div class="grid-wrap scroll-y">
-  <!-- extra line on top -->
-  <div class="flex-row">
-    <div class="line-name border-dashed-r"></div>
-    <div class="line border-dashed-b gap"></div>
-  </div>
-
   @for (row of rowsSig(); track $index) {
   <div class="flex-row">
     <div class="line-name border-dashed-r">
       {{ row }}
     </div>
-    <div class="line border-dashed-b gap"></div>
+    <div class="line border-dashed-t gap"></div>
   </div>
   }
   <div class="content">

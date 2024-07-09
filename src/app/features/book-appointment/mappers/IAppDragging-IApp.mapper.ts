@@ -1,8 +1,8 @@
-import { getRandomId } from '../../shared/utils/random-id.util';
+import { getRandomId } from '../../../shared/utils/random-id.util';
 import {
   IAppointment,
   IAppointmentDragging,
-} from '../book-appointment/interfaces/appointment.interface';
+} from '../interfaces/appointment.interface';
 import { IMapper } from './mapper.interface';
 
 export class IAppDraggingToIAppClass
@@ -17,7 +17,9 @@ export class IAppDraggingToIAppClass
     const startMins = Number(
       draggedApp.startDate.getMinutes() + differenceInTime.minutes
     );
-    const startDate = new Date(selectedDate.setHours(startHours, startMins));
+    const startDate = new Date(
+      new Date(selectedDate).setHours(startHours, startMins)
+    );
 
     const endHours = Number(
       draggedApp.endDate.getHours() + differenceInTime.hours
@@ -25,7 +27,9 @@ export class IAppDraggingToIAppClass
     const endMins = Number(
       draggedApp.endDate.getMinutes() + differenceInTime.minutes
     );
-    const endDate = new Date(selectedDate.setHours(endHours, endMins));
+    const endDate = new Date(
+      new Date(selectedDate).setHours(endHours, endMins)
+    );
 
     return {
       startDate,

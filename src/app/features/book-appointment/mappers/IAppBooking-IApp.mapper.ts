@@ -1,8 +1,8 @@
-import { getRandomId } from '../../shared/utils/random-id.util';
+import { getRandomId } from '../../../shared/utils/random-id.util';
 import {
   IAppointment,
   IAppointmentBooking,
-} from '../book-appointment/interfaces/appointment.interface';
+} from '../interfaces/appointment.interface';
 import { IMapper } from './mapper.interface';
 
 export class IAppBookingToIAppClass

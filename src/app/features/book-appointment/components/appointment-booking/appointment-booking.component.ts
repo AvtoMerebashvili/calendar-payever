@@ -28,8 +28,8 @@ import { timeValidator } from '../../../../shared/utils/validations/time.validat
 export class AppointmentBookingComponent implements OnInit {
   public form = new FormGroup({
     name: new FormControl('asdasd', Validators.required),
-    startTime: new FormControl('2:10', [Validators.required, timeValidator()]),
-    endTime: new FormControl('5:10', [Validators.required, timeValidator()]),
+    startTime: new FormControl('0:10', [Validators.required, timeValidator()]),
+    endTime: new FormControl('1:50', [Validators.required, timeValidator()]),
   });
 
   constructor(
@@ -51,6 +51,10 @@ export class AppointmentBookingComponent implements OnInit {
 
   onCancel() {
     this.dialogRef.close();
+  }
+
+  onRemove() {
+    this.dialogRef.close('remove');
   }
 
   onSubmit() {

@@ -1,18 +1,17 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Injectable, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { filter, map, take, tap } from 'rxjs';
-import { getRandomId } from '../../../shared/utils/random-id.util';
+import { filter, finalize, map, take, tap } from 'rxjs';
 import { AppointmentBookingComponent } from '../components/appointment-booking/appointment-booking.component';
 import {
   IAppointment,
   IAppointmentBooking,
   IAppointmentDragging,
 } from '../interfaces/appointment.interface';
+import { IAppBookingToIAppClass } from '../mappers/IAppBooking-IApp.mapper';
+import { IAppDraggingToIAppClass } from '../mappers/IAppDragging-IApp.mapper';
+import { Mapper } from '../mappers/Mapper.class';
 import { StoreService } from './store.service';
-import { Mapper } from '../../mappers/Mapper.class';
-import { IAppDraggingToIAppClass } from '../../mappers/IAppDragging-IApp.mapper';
-import { IAppBookingToIAppClass } from '../../mappers/IAppBooking-IApp.mapper';
 
 @Injectable()
 export class AppointmentService {
@@ -59,6 +58,13 @@ export class AppointmentService {
         })
         .closed.pipe(
           take(1),
+          map((v) => {
+            if (v === 'remove') {
+              this.store.remove(appointment!.id);
+              return false;
+            }
+            return v;
+          }),
           filter((v) => !!v),
           map((app) => {
             const mapper = new Mapper(new IAppBookingToIAppClass());
@@ -69,8 +75,10 @@ export class AppointmentService {
             return model;
           }),
           tap((model) => this.store.set(model)),
-          tap((_) => this.selectedDateAppointmentsSig.set(this.store.getAll())),
-          tap((_) => (this.isDragging = false))
+          finalize(() =>
+            this.selectedDateAppointmentsSig.set(this.store.getAll())
+          ),
+          finalize(() => (this.isDragging = false))
         )
         .subscribe();
   }
