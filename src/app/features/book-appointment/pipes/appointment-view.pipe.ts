@@ -6,15 +6,15 @@ import { IAppointment } from '../interfaces/appointment.interface';
   standalone: true,
 })
 export class AppointmentViewPipe implements PipeTransform {
-  transform(value: IAppointment): unknown {
+  transform(app: IAppointment): unknown {
     return (
-      value.startDate.getHours() +
+      app.startDate.getHours() +
       ':' +
-      value.startDate.getMinutes() +
+      app.startDate.getMinutes() +
       ' - ' +
-      value.endDate.getHours() +
+      app.endDate.getHours() +
       ':' +
-      value.endDate.getMinutes()
+      app.endDate.getMinutes()
     ).toString();
   }
 }
