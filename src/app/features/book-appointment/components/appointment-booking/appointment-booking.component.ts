@@ -4,6 +4,7 @@ import {
   Component,
   Inject,
   OnInit,
+  signal,
 } from '@angular/core';
 import { IAppointment } from '../../interfaces/appointment.interface';
 import { CommonModule } from '@angular/common';
@@ -27,10 +28,11 @@ import { timeValidator } from '../../../../shared/utils/validations/time.validat
 })
 export class AppointmentBookingComponent implements OnInit {
   public form = new FormGroup({
-    name: new FormControl('asdasd', Validators.required),
-    startTime: new FormControl('0:10', [Validators.required, timeValidator()]),
-    endTime: new FormControl('1:50', [Validators.required, timeValidator()]),
+    name: new FormControl('', Validators.required),
+    startTime: new FormControl('', [Validators.required, timeValidator()]),
+    endTime: new FormControl('', [Validators.required, timeValidator()]),
   });
+  isUpdateSig = signal(false);
 
   constructor(
     @Inject(DIALOG_DATA) private appointment: IAppointment,
@@ -46,6 +48,7 @@ export class AppointmentBookingComponent implements OnInit {
         this.getTimeFromDate(this.appointment.endDate)
       );
       this.nameControl.setValue(this.appointment.name);
+      this.isUpdateSig.set(true);
     }
   }
 

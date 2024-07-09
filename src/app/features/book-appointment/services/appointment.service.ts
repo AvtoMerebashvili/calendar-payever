@@ -64,6 +64,7 @@ export class AppointmentService {
         })
         .closed.pipe(
           take(1),
+          filter((v) => !!v),
           map((v) => {
             if (v === 'remove') {
               this.store.remove(appointment!.id);
