@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
 import { IAppointment } from '../interfaces/appointment.interface';
 import { IPositions } from '../../../shared/interfaces/position.interface';
 
@@ -8,8 +8,6 @@ import { IPositions } from '../../../shared/interfaces/position.interface';
 })
 export class PositionPipe implements PipeTransform {
   transform(appointment: IAppointment): IPositions {
-    console.log(appointment.startDate.getMinutes());
-    console.log(appointment);
     const startHours = appointment.startDate.getHours() * 60;
     const startMinutes = appointment.startDate.getMinutes();
     const start = startHours + startMinutes;

@@ -17,10 +17,10 @@ export class IAppDraggingToIAppClass
     const startMins = Number(
       draggedApp.startDate.getMinutes() + differenceInTime.minutes
     );
+
     const startDate = new Date(
       new Date(selectedDate).setHours(startHours, startMins)
     );
-
     const endHours = Number(
       draggedApp.endDate.getHours() + differenceInTime.hours
     );
@@ -42,7 +42,7 @@ export class IAppDraggingToIAppClass
 
 function calculateTimeByDragging(pixels: number) {
   return {
-    hours: Math.round(Number(pixels / 60)),
+    hours: Math.trunc(Number(pixels / 60)),
     minutes: Number(pixels % 60),
   };
 }

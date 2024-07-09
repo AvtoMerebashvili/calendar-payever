@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +15,7 @@ import { StoreService } from './services/store.service';
   selector: 'app-book-appointment',
   standalone: true,
   imports: [
+    CommonModule,
     DragAndDropComponent,
     AppointmentComponent,
     GridComponent,

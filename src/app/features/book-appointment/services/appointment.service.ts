@@ -1,7 +1,7 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Injectable, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { filter, finalize, map, take, tap } from 'rxjs';
+import { BehaviorSubject, delay, filter, finalize, map, take, tap } from 'rxjs';
 import { AppointmentBookingComponent } from '../components/appointment-booking/appointment-booking.component';
 import {
   IAppointment,
@@ -15,15 +15,16 @@ import { StoreService } from './store.service';
 
 @Injectable()
 export class AppointmentService {
-  isDragging = false;
+  private isDragging = false;
   public dateControl = new FormControl<Date>(new Date());
-  public selectedDateAppointmentsSig = signal<IAppointment[]>([]);
+  public selectedDateAppointments$ = new BehaviorSubject<IAppointment[]>([]);
 
   constructor(public dialog: Dialog, private store: StoreService) {
     this.dateControl.valueChanges
       .pipe(
+        delay(0),
         tap((v) => this.store.setDate(v as Date)),
-        tap((_) => this.selectedDateAppointmentsSig.set(this.store.getAll()))
+        tap((_) => this.selectedDateAppointments$.next(this.store.getAll()))
       )
       .subscribe();
   }
@@ -38,7 +39,12 @@ export class AppointmentService {
     const mapper = new Mapper(new IAppDraggingToIAppClass());
     const model = mapper.map(appointment, this.dateControl.value as Date);
     this.store.set(model);
-    this.selectedDateAppointmentsSig.set(this.store.getAll());
+    this.selectedDateAppointments$.next(this.store.getAll());
+
+    // this is because of angular dragAndDrop sets transform style to the draggable component and it just kills my positions for first time after dragging
+    const currDate = this.dateControl.value;
+    this.dateControl.setValue(new Date('1800/02/02'));
+    this.dateControl.setValue(currDate);
   }
 
   onAppointmentClick(id: number) {
@@ -76,7 +82,7 @@ export class AppointmentService {
           }),
           tap((model) => this.store.set(model)),
           finalize(() =>
-            this.selectedDateAppointmentsSig.set(this.store.getAll())
+            this.selectedDateAppointments$.next(this.store.getAll())
           ),
           finalize(() => (this.isDragging = false))
         )

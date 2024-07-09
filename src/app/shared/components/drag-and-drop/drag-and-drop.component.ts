@@ -5,7 +5,6 @@ import {
   Component,
   ContentChild,
   Input,
-  signal,
 } from '@angular/core';
 import { DraggableComponent } from '../../base/components/draggable.components';
 import { DRAGGABLE_TOKEN } from '../../tokens/draggable-token';
@@ -22,7 +21,6 @@ export class DragAndDropComponent<T extends { id: number }> {
   @ContentChild(DRAGGABLE_TOKEN)
   component!: DraggableComponent<T>;
 
-  @Input() positions!: { height: number; top: number };
-
-  public contentInitedSig = signal(false);
+  @Input()
+  positions!: { height: number; top: number };
 }

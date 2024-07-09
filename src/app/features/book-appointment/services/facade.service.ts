@@ -6,7 +6,8 @@ import { StoreService } from './store.service';
 @Injectable()
 export class FacadeService {
   public dateControl = this.appointmentService.dateControl;
-  public appointmentsSig = this.appointmentService.selectedDateAppointmentsSig;
+  public selectedDateAppointments$ =
+    this.appointmentService.selectedDateAppointments$;
 
   constructor(
     private appointmentService: AppointmentService,
