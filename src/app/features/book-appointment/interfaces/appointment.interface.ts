@@ -16,6 +16,4 @@ export interface IAppointment extends IAppointmentBase {
   endDate: Date;
 }
 
-export interface IAppointmentOutput extends CdkDragEnd {
-  itemId: number;
-}
+export interface IAppointmentDragging extends IAppointment, CdkDragEnd {}

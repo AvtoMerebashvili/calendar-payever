@@ -4,7 +4,7 @@
   cdkDragLockAxis="y"
   cdkDrag
   (cdkDragStarted)="component.cdkDragStarted()"
-  (cdkDragEnded)="component.cdkDragEnded($event, item.id)"
+  (cdkDragEnded)="component.cdkDragEnded($event, item)"
   [ngStyle]="{
     height: positions.height + 'px',
     top: positions.top + 'px'

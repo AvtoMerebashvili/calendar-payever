@@ -18,9 +18,10 @@ export class PositionPipe implements PipeTransform {
 
     //TODO fix styles to be flexible not hardwritten
     const padding = 25;
+    const extraRow = 60;
 
     return {
-      top: Math.round(start + padding),
+      top: Math.round(start + padding + extraRow),
       height: Math.round(end - start),
     };
   }

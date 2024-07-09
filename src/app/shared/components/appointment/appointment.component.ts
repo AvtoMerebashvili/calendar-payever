@@ -7,12 +7,13 @@ import {
   Input,
   Output,
   forwardRef,
+  output,
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { DraggableComponent } from '../../base/components/draggable.components';
 import {
   IAppointment,
-  IAppointmentOutput,
+  IAppointmentDragging,
 } from '../../../features/book-appointment/interfaces/appointment.interface';
 import { DRAGGABLE_TOKEN } from '../../tokens/draggable-token';
 
@@ -35,11 +36,15 @@ export class AppointmentComponent extends DraggableComponent<IAppointment> {
   @Input() set appointment(app: IAppointment) {
     this._item$.next(app);
   }
-  @Output() appointmentDragged = new EventEmitter<IAppointmentOutput>();
+  @Output() draggingStarted = new EventEmitter<boolean>();
+  @Output() appointmentDragged = new EventEmitter<IAppointmentDragging>();
   @Output() appointmentClicked = new EventEmitter();
 
-  public override cdkDragStarted = () => this.isDragging.set(true);
-  public override cdkDragEnded = (cdkDragEnded: CdkDragEnd, itemId: number) => {
-    this.appointmentDragged.emit({ ...cdkDragEnded, itemId });
+  public override cdkDragStarted = () => this.draggingStarted.emit(true);
+  public override cdkDragEnded = (
+    cdkDragEnded: CdkDragEnd,
+    item: IAppointment
+  ) => {
+    this.appointmentDragged.emit({ ...cdkDragEnded, ...item });
   };
 }

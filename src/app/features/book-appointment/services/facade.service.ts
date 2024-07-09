@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppointmentService } from './appointment.service';
-import { IAppointmentOutput } from '../interfaces/appointment.interface';
+import { IAppointmentDragging } from '../interfaces/appointment.interface';
 import { StoreService } from './store.service';
 
 @Injectable()
@@ -13,7 +13,11 @@ export class FacadeService {
     private storeService: StoreService
   ) {}
 
-  public onAppointmentDrag(appointment: IAppointmentOutput) {
+  public onDraggingStarted() {
+    this.appointmentService.onDraggingStarted();
+  }
+
+  public onAppointmentDrag(appointment: IAppointmentDragging) {
     this.appointmentService.onAppointmentDrag(appointment);
   }
 

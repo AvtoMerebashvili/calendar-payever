@@ -14,10 +14,9 @@ export class StoreService {
     return targetAppointment;
   }
 
-  public getAll = () => this._store.get(this.getKey());
+  public getAll = (): IAppointment[] => this._store.get(this.getKey()) || [];
 
   public set(appointment: IAppointment) {
-    console.log(appointment);
     const key = this.getKey();
     const currentAppointments = [...(this.getAll() || [])];
     const filteredAppoitnments = currentAppointments.filter(
