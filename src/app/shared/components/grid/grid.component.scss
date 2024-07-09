@@ -1,0 +1,25 @@
+.grid-wrap {
+  position: relative;
+  width: 900px;
+  height: 80vh;
+  overflow-x: hidden;
+  padding-top: 25px;
+
+  .flex-row {
+    height: 60px;
+
+    .line-name {
+      transform: translateY(-50%);
+      height: fit-content;
+      width: 40px;
+    }
+    .gap {
+      width: 100%;
+    }
+  }
+
+  .content {
+    margin-left: 40px;
+    width: 900px;
+  }
+}

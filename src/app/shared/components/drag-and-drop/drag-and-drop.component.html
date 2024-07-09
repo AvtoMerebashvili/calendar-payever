@@ -1,0 +1,17 @@
+@if (component.item$ | async; as item) {
+<div
+  class="example-box"
+  cdkDragLockAxis="y"
+  cdkDrag
+  (cdkDragStarted)="component.cdkDragStarted()"
+  (cdkDragEnded)="component.cdkDragEnded($event, item.id)"
+  [ngStyle]="{
+    height: positions.height + 'px',
+    top: positions.top + 'px'
+  }"
+>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>
+}

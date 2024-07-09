@@ -1,0 +1,34 @@
+.component {
+  width: 100%;
+  height: 100%;
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: #2063c0;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      font-family: "Roboto", sans-serif;
+      font-size: 30px;
+      margin: 0;
+      line-height: normal;
+      // text-align: center;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+    .block {
+      width: 30%;
+      color: white;
+      height: 100%;
+    }
+    .title {
+      padding: 10px 0 0 15px;
+    }
+  }
+}
+
+mat-card {
+  height: 100%;
+}

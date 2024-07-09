@@ -1,0 +1,25 @@
+<div class="width-100 height-100">
+  <div class="grid c-25-75">
+    <div class="padding-16">
+      <button mat-raised-button (click)="facade.onNewAppointment()">
+        Add Appointment
+      </button>
+      <div class="margin-top-16">
+        <app-datepicker [formControl]="facade.dateControl"></app-datepicker>
+      </div>
+    </div>
+    <div>
+      <app-grid [rowsAmount]="24" [rowHeight]="60">
+        @for (appointment of facade.appointmentsSig(); track $index) {
+        <app-drag-and-drop [positions]="appointment | position">
+          <app-appointment
+            [appointment]="appointment"
+            (appointmentDragged)="facade.onAppointmentDrag($event)"
+            (appointmentClicked)="facade.onAppointmentClick($event)"
+          ></app-appointment>
+        </app-drag-and-drop>
+        }
+      </app-grid>
+    </div>
+  </div>
+</div>

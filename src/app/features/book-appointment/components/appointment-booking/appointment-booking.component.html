@@ -1,0 +1,28 @@
+<div class="component">
+  <form [formGroup]="form">
+    <app-input
+      formControlName="name"
+      label="title"
+      placeholder="what is up"
+    ></app-input>
+    <div class="flex-row gap-8">
+      <app-input
+        formControlName="startTime"
+        label="Start"
+        placeholder="HH:MM"
+      ></app-input>
+      <app-input
+        formControlName="endTime"
+        label="End"
+        placeholder="HH:MM"
+      ></app-input>
+    </div>
+  </form>
+  <div class="flex-row justify-space-between">
+    <div></div>
+    <div class="flex-row gap-16">
+      <button mat-raised-button (click)="onCancel()">Cancel</button>
+      <button mat-raised-button (click)="onSubmit()">Add</button>
+    </div>
+  </div>
+</div>
