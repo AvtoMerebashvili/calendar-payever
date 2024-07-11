@@ -1,4 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,17 +7,16 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { IAppointment } from '../../interfaces/appointment.interface';
-import { CommonModule } from '@angular/common';
-import { InputComponent } from '../../../../shared/form/input/input.component';
 import {
+  FormBuilder,
   FormControl,
-  FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { InputComponent } from '../../../../shared/form/input/input.component';
 import { timeValidator } from '../../../../shared/utils/validations/time.validator';
+import { IAppointment } from '../../interfaces/appointment.interface';
 
 @Component({
   selector: 'app-appointment-booking',
@@ -27,16 +27,18 @@ import { timeValidator } from '../../../../shared/utils/validations/time.validat
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppointmentBookingComponent implements OnInit {
-  public form = new FormGroup({
+  public form = this.formBuilder.group({
     name: new FormControl('', Validators.required),
     startTime: new FormControl('', [Validators.required, timeValidator()]),
     endTime: new FormControl('', [Validators.required, timeValidator()]),
   });
+
   isUpdateSig = signal(false);
 
   constructor(
     @Inject(DIALOG_DATA) private appointment: IAppointment,
-    private dialogRef: DialogRef
+    private dialogRef: DialogRef,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {

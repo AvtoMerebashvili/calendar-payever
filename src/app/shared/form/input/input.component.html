@@ -4,6 +4,8 @@
     matInput
     type="text"
     [formControl]="control"
-    [placeholder]="placeHolder"
+    [placeholder]="placeholder"
+    (blur)="this.onTouch()"
   />
+  <mat-error>{{ validationMessage$ | async }}</mat-error>
 </mat-form-field>

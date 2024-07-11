@@ -1,7 +1,9 @@
-import { Directive } from '@angular/core';
+import { Component } from '@angular/core';
 import { ControlValueAccessor, FormControl } from '@angular/forms';
 
-@Directive()
+@Component({
+  template: '',
+})
 export class ControlComponent implements ControlValueAccessor {
   public control = new FormControl();
 

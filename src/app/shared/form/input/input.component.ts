@@ -6,17 +6,12 @@ import {
   OnDestroy,
   OnInit,
   forwardRef,
-  input,
 } from '@angular/core';
-import {
-  FormControl,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { Subscription, skip } from 'rxjs';
-import { ControlComponent } from '../../base/components/control.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ValdationComponent } from '../../base/components/validation-control.component';
 
 @Component({
   selector: 'app-input',
@@ -39,11 +34,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent
-  extends ControlComponent
+  extends ValdationComponent
   implements OnInit, OnDestroy
 {
   @Input() label!: string;
-  @Input() placeHolder!: string;
+  @Input() placeholder!: string;
   private _subscription!: Subscription;
 
   ngOnInit(): void {
